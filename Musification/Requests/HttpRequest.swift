@@ -13,26 +13,29 @@ class HttpRequest {
         if let dbURL = URL(string: urlString) {
             var dbRequest = URLRequest(url: dbURL, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 60)
             dbRequest.httpMethod = "GET"
-            dbRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
-            let task = URLSession.shared.dataTask(with: dbRequest) { (data, response, error) in
-                if let data = data {
-                    do {
-                        let json = try JSONSerialization.jsonObject(with: data, options: .mutableLeaves)
-                        if let data = json as? [String:Any] {
-                            success(data)
+            if let key = APIKeys.appleMusicKey {
+                let header = "Bearer " + key
+                dbRequest.addValue(header, forHTTPHeaderField: "Authorization")
+                    let task = URLSession.shared.dataTask(with: dbRequest) { (data, response, error) in
+                        if let data = data {
+                            do {
+                                let json = try JSONSerialization.jsonObject(with: data, options: .mutableLeaves)
+                                if let data = json as? [String:Any] {
+                                    success(data)
+                                } else {
+                                    fail(CustomError("JSON data from HTTP request was not an dictionary of [String:Any]"))
+                                }
+                            } catch {
+                                fail(error)
+                            }
                         } else {
-                            fail(CustomError("JSON data was not an dictionary of [String:Any]"))
+                            fail(CustomError("Data from HTTP request is null."))
                         }
-                    } catch {
-                        fail(error)
                     }
-                } else {
-                    fail(CustomError("data is null"))
-                }
+                    task.resume()
+            } else {
+                fail(CustomError("Apple music key is not available."))
             }
-            
-            task.resume()
-            
         } else {
             fail(CustomError("Bad URL string"))
         }

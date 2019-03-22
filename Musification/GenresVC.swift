@@ -12,7 +12,7 @@ class GenresVC: UICollectionViewController {
 
     let itemsPerRow = 2
     let sectionInsets = UIEdgeInsets(top: 10, left: 15, bottom: 10, right: 15)
-    let genres: [Int] = [1,2,3,4,5,6]
+    var genres: [String] = []
     
     var toolbar: UIView?
     var toolbarWrapper: CustomToolbar?
@@ -27,13 +27,20 @@ class GenresVC: UICollectionViewController {
         navigationController?.isNavigationBarHidden = true
         // Do any additional setup after loading the view, typically from a nib.
         layoutSubviews()
-        print("TOOLBAR FRAME:")
-        print(toolbar!.frame)
-    }
-    
-    override func viewDidLayoutSubviews() {
-        print("TOOLBAR FRAME:")
-        print(toolbar!.bounds)
+        print("\n\n\n\n")
+        MusicRequest.getGenres(success: { (genres) in
+            print("Genres:")
+            for genre in genres {
+                print(genre)
+            }
+            self.genres = genres
+            DispatchQueue.main.async {
+                self.collectionView.reloadData()
+            }
+        }) { (error) in
+            print("Failure:")
+            print(error)
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -83,15 +90,31 @@ extension GenresVC : UICollectionViewDelegateFlowLayout {
 // MARK: CollectionView DataSource methods
 extension GenresVC {
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return genres.count
+        print("\n\n\nCount:")
+        print(genres.count)
+        if genres.count % 2 == 1 {
+            return genres.count / 2 + 1
+        } else {
+            return genres.count / 2
+        }
     }
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return itemsPerRow
     }
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Default", for: cellForItemAt)
+        print(genres.count)
+        print("Section: \(cellForItemAt.section) Row: \(cellForItemAt.row)")
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Default", for: cellForItemAt) as! GenreCollectionViewCell
         cell.backgroundColor = Colors.cinnabar
         cell.layer.cornerRadius = 5
+        let index = cell
+        if cellForItemAt.section * 2 + cellForItemAt.row  >= genres.count {
+            cell.backgroundColor = UIColor.black
+            cell.tag = -1
+        } else {
+            cell.cellTextLbl.text = genres[cellForItemAt.section * 2 + cellForItemAt.row]
+        }
+        
         return cell
     }
 }

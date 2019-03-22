@@ -18,6 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         FIRApp.configure()
+        configureAPIs()
         return true
     }
 
@@ -43,6 +44,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 
+    private func configureAPIs() {
+        let url = Bundle.main.url(forResource: "keys", withExtension: "json")
+        var data = Data()
+        var keys = [String:String]()
+        do { data = try Data(contentsOf: url!) }
+        catch let error { print("Error: \(error)") }
+        do { keys = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [String:String]}
+        catch let error { print("Error: \(error)") }
+        
+        let appleMusicAPIKey = keys["apple_music"]!
+        APIKeys.appleMusicKey = appleMusicAPIKey
+    }
 
 }
 
