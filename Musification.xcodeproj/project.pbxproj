@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		5A907BAD2243527D00E9CF75 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5A907BAC2243527D00E9CF75 /* GoogleService-Info.plist */; };
+		5A907BAF22440F9800E9CF75 /* MusicRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A907BAE22440F9800E9CF75 /* MusicRequest.swift */; };
+		5A907BB1224410E900E9CF75 /* HttpRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A907BB0224410E900E9CF75 /* HttpRequest.swift */; };
 		5A9F4A6F21D6B02700731D7E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A9F4A6E21D6B02700731D7E /* AppDelegate.swift */; };
 		5A9F4A7121D6B02700731D7E /* GenresVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A9F4A7021D6B02700731D7E /* GenresVC.swift */; };
 		5A9F4A7421D6B02700731D7E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5A9F4A7221D6B02700731D7E /* Main.storyboard */; };
@@ -45,6 +47,8 @@
 		0833DA275F10E656CB4921F7 /* Pods_Musification.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Musification.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		280DF19FE1CB34FC05715247 /* Pods-MusificationTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MusificationTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MusificationTests/Pods-MusificationTests.release.xcconfig"; sourceTree = "<group>"; };
 		5A907BAC2243527D00E9CF75 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		5A907BAE22440F9800E9CF75 /* MusicRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicRequest.swift; sourceTree = "<group>"; };
+		5A907BB0224410E900E9CF75 /* HttpRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpRequest.swift; sourceTree = "<group>"; };
 		5A9F4A6B21D6B02700731D7E /* Musification.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Musification.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A9F4A6E21D6B02700731D7E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5A9F4A7021D6B02700731D7E /* GenresVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenresVC.swift; sourceTree = "<group>"; };
@@ -97,6 +101,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5A907BB222448B8D00E9CF75 /* Requests */ = {
+			isa = PBXGroup;
+			children = (
+				5A907BAE22440F9800E9CF75 /* MusicRequest.swift */,
+				5A907BB0224410E900E9CF75 /* HttpRequest.swift */,
+			);
+			path = Requests;
+			sourceTree = "<group>";
+		};
 		5A9F4A6221D6B02700731D7E = {
 			isa = PBXGroup;
 			children = (
@@ -124,6 +137,7 @@
 			children = (
 				5A9F4A6E21D6B02700731D7E /* AppDelegate.swift */,
 				5A9F4A7021D6B02700731D7E /* GenresVC.swift */,
+				5A907BB222448B8D00E9CF75 /* Requests */,
 				5AD30D7A21E1578C0066BFA6 /* ArtistsVC.swift */,
 				5A9F4A9C21D6B2E100731D7E /* Colors.swift */,
 				5A9F4A7221D6B02700731D7E /* Main.storyboard */,
@@ -407,7 +421,9 @@
 				5AD30D7B21E1578C0066BFA6 /* ArtistsVC.swift in Sources */,
 				5A9F4A9F21D7E81D00731D7E /* CustomToolbar.swift in Sources */,
 				5A9F4A7121D6B02700731D7E /* GenresVC.swift in Sources */,
+				5A907BAF22440F9800E9CF75 /* MusicRequest.swift in Sources */,
 				5A9F4A9D21D6B2E100731D7E /* Colors.swift in Sources */,
+				5A907BB1224410E900E9CF75 /* HttpRequest.swift in Sources */,
 				5A9F4A6F21D6B02700731D7E /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
