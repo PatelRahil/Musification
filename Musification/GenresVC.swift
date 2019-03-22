@@ -52,9 +52,7 @@ class GenresVC: UICollectionViewController {
     }
     
     func layoutSubviews() {
-        print(collectionView.frame)
         self.collectionView.frame = CGRect(x: UIScreen.main.bounds.origin.x, y: UIScreen.main.bounds.origin.y, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height - toolbar!.frame.height)
-        print(collectionView.frame)
         self.collectionView.backgroundColor = UIColor.black
         self.view.tintColor = UIColor.white
     }
@@ -107,7 +105,6 @@ extension GenresVC {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Default", for: cellForItemAt) as! GenreCollectionViewCell
         cell.backgroundColor = Colors.cinnabar
         cell.layer.cornerRadius = 5
-        let index = cell
         if cellForItemAt.section * 2 + cellForItemAt.row  >= genres.count {
             cell.backgroundColor = UIColor.black
             cell.tag = -1
