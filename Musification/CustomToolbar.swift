@@ -41,7 +41,11 @@ class CustomToolbar {
                 button.layer.borderWidth = 1
                 button.layer.borderColor = UIColor.black.cgColor
                 button.tag = index
-
+                
+                if index == CustomToolbar.state {
+                    button.backgroundColor = toolbarView.backgroundColor?.darker(by: 40)
+                }
+                
                 button.addTarget(self, action: #selector(buttonTapped(_:)), for: .touchUpInside)
                 toolbarView.addSubview(button)
             case .image:
@@ -64,15 +68,7 @@ class CustomToolbar {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         var destVC = storyboard.instantiateViewController(withIdentifier: destVCIdentifier)
         if let currentVC = navController.topViewController {
-            print("\n\n\nTYPES\n\n")
-            print(type(of: currentVC))
-            print(type(of: destVC))
-            print("\n\n\n")
             if type(of: currentVC) != type(of: destVC) {
-                print("nav controller vc's")
-                for c in navController.viewControllers {
-                    print(type(of: c))
-                }
                 if navController.viewControllers.contains(where: { (vc) -> Bool in
                     let same = type(of: vc) == type(of: destVC)
                     if same  { destVC = vc }
@@ -83,6 +79,7 @@ class CustomToolbar {
                         UIView.setAnimationCurve(.easeInOut)
                         UIView.setAnimationTransition(.flipFromLeft, for: (self.navController.view)!, cache: false)
                     })
+                    CustomToolbar.state = sender.tag
                     navController.popToViewController(destVC, animated: false)
                 } else {
                     print("PUSH")
@@ -90,8 +87,8 @@ class CustomToolbar {
                         UIView.setAnimationCurve(.easeInOut)
                         UIView.setAnimationTransition(.flipFromRight, for: (self.navController.view)!, cache: false)
                     })
+                    CustomToolbar.state = sender.tag
                     navController.pushViewController(destVC, animated: false)
-                    print("Go from \(currentVC) to \(destVC)\n\n\n")
                 }
             }
         } else {
