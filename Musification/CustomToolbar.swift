@@ -11,8 +11,8 @@ import UIKit
 
 class CustomToolbar {
     static let items: [ToolbarItem] = [
-        ToolbarItem(content: "Screen 1", type: .text, storyboardID: "GenresVC"),
-        ToolbarItem(content: "Screen 2", type: .text, storyboardID: "ArtistsVC")
+        ToolbarItem(content: "Genres", type: .text, storyboardID: "GenresVC"),
+        ToolbarItem(content: "Artists", type: .text, storyboardID: "ArtistsVC")
     ]
     static var state = 0
     static var currentItem = CustomToolbar.items[CustomToolbar.state]
