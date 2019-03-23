@@ -9,10 +9,11 @@
 import Foundation
 
 class MusicRequest : HttpRequest {
-    static let rootDbPath = "https://api.music.apple.com/v1/catalog/"
+    private static let rootDbPath = "https://api.music.apple.com/v1/catalog/"
     // can add functionality later to change based on locality
-    static let storefront = "us"
-    static var header: String? {
+    private static let storefront = "us"
+    private static let headerField = "Authorization"
+    private static var header: String? {
         if let key = APIKeys.appleMusicKey {
             return "Bearer " + key
         }
