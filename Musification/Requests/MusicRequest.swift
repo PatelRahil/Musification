@@ -19,10 +19,10 @@ class MusicRequest : HttpRequest {
         }
         return nil
     }
-    static func getGenres(success: @escaping (_ data: [String]) -> Void, fail: @escaping (_ error: Error) -> Void) {
+    
+    static func getGenres(success: @escaping (_ genres: [Genre]) -> Void, fail: @escaping (_ error: Error) -> Void) {
         let urlString = rootDbPath + storefront + "/genres"
         if let header = header {
-            let headerField = "Authorization"
             super.makeGetRequest(urlString: urlString, header: header, headerField: headerField, success: { (data) in
                 processGenreData(data: data, success: { (genres) in
                     success(genres)
@@ -36,23 +36,69 @@ class MusicRequest : HttpRequest {
             fail(CustomError("Apple music key is not available."))
         }
     }
-    private static func processGenreData(data: [String:Any], success: @escaping (_ data: [String]) -> Void, fail: @escaping (_ error: Error) -> Void) {
+    private static func processGenreData(data: [String:Any], success: @escaping (_ genres: [Genre]) -> Void, fail: @escaping (_ error: Error) -> Void) {
         if let allGenreData = data["data"] as? [[String:Any]] {
-            var genres: [String] = []
-            for genreData in allGenreData {
-                if let genreAttribute = genreData["attributes"] as? [String:Any] {
-                    if let genreName = genreAttribute["name"] as? String {
-                        genres.append(genreName)
+            processArrayOf(arrData: allGenreData, example: Genre() , success: { (genres) in
+                success(genres)
+            }) { (error) in
+                fail(error)
+            }
+        } else {
+            fail(CustomError("The data does not have \"data\" or data is not an array of String:Any dictionaries"))
+        }
+    }
+ 
+    
+    static func getSongs(genreID: String, limit: Int, success: @escaping (_ data: [Song]) -> Void, fail: @escaping (_ error: Error) -> Void) {
+        let urlString = rootDbPath + storefront + "/charts?types=songs&genre=\(genreID)&limit=\(limit)"
+        if let header = header {
+            super.makeGetRequest(urlString: urlString, header: header, headerField: headerField, success: { (data) in
+                processSongData(data: data, success: { (songs) in
+                    success(songs)
+                }, fail: { (error) in
+                    fail(error)
+                })
+            }) { (error) in
+                fail(error)
+            }
+        } else {
+            fail(CustomError("Apple music key is not available."))
+        }
+    }
+    private static func processSongData(data: [String:Any], success: @escaping (_ genres: [Song]) -> Void, fail: @escaping (_ error: Error) -> Void) {
+        if let results = data["results"] as? [String:Any] {
+            if let songsWrapper = results["songs"] as? [[String:Any]] {
+                if let songs = songsWrapper.first {
+                    if let songsData = songs["data"] as? [[String:Any]] {
+                        processArrayOf(arrData: songsData, example: Song(), success: { (songs) in
+                            success(songs)
+                        }) { (error) in
+                            fail(error)
+                        }
                     } else {
-                        fail(CustomError("Genre attribute does not have a name or name is not a String."))
+                        fail(CustomError("The songs does not have \"data\" or songsData is not an array of String:Any dictionaries."))
                     }
                 } else {
-                    fail(CustomError("Genre data does not have attributes or attributes is not a String:Any pair."))
+                    fail(CustomError("The songs wrapper does not have any elements."))
                 }
+            } else {
+                fail(CustomError("The results does not have \"songs\" or songsWrapper is not an array of String:Any dictionaries."))
             }
-            success(genres)
         } else {
-            fail(CustomError("The data does not have \"data\" or data is not an array of String:Any pairs"))
+            fail(CustomError("The data does not have \"results\" or results is not a dictionary of String:Any pairs."))
         }
+    }
+    
+    private static func processArrayOf<T>(arrData: [[String:Any]], example: T, success: @escaping (_ result: [T]) -> Void, fail: @escaping (_ error: Error) -> Void) where T: DataParsable {
+        var res:[T] = []
+        for data in arrData {
+            let obj = T()
+            obj.parseData(data: data, success: { (result) in
+                res.append(result)
+            }) { (error) in
+                fail(error)
+            }
+        }
+        success(res)
     }
 }

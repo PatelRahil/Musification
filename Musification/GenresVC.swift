@@ -12,7 +12,7 @@ class GenresVC: UICollectionViewController {
 
     let itemsPerRow = 2
     let sectionInsets = UIEdgeInsets(top: 10, left: 15, bottom: 10, right: 15)
-    var genres: [String] = []
+    var genres: [Genre] = []
     
     var toolbar: UIView?
     var toolbarWrapper: CustomToolbar?
@@ -31,14 +31,24 @@ class GenresVC: UICollectionViewController {
         MusicRequest.getGenres(success: { (genres) in
             print("Genres:")
             for genre in genres {
-                print(genre)
+                print(genre.name)
             }
             self.genres = genres
             DispatchQueue.main.async {
                 self.collectionView.reloadData()
             }
         }) { (error) in
-            print("Failure:")
+            print("Genre Failure:")
+            print(error)
+        }
+        print()
+        MusicRequest.getSongs(genreID: "20", limit: 10, success: { (songs) in
+            print("Songs:")
+            for song in songs {
+                print("\(song.name) by \(song.artist)")
+            }
+        }) { (error) in
+            print("Song Failure")
             print(error)
         }
     }
@@ -109,7 +119,7 @@ extension GenresVC {
             cell.backgroundColor = UIColor.black
             cell.tag = -1
         } else {
-            cell.cellTextLbl.text = genres[cellForItemAt.section * 2 + cellForItemAt.row]
+            cell.cellTextLbl.text = genres[cellForItemAt.section * 2 + cellForItemAt.row].name
         }
         
         return cell
