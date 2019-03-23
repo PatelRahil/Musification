@@ -14,14 +14,19 @@ class MusicRequest : HttpRequest {
     static let storefront = "us"
     static func getGenres(success: @escaping (_ data: [String]) -> Void, fail: @escaping (_ error: Error) -> Void) {
         let urlString = rootDbPath + storefront + "/genres"
-        super.makeGetRequest(urlString: urlString, success: { (data) in
-            processGenreData(data: data, success: { (genres) in
-                success(genres)
-            }, fail: { (error) in
+        if let key = APIKeys.appleMusicKey {
+            let header = "Bearer " + key
+            super.makeGetRequest(urlString: urlString, header: header, success: { (data) in
+                processGenreData(data: data, success: { (genres) in
+                    success(genres)
+                }, fail: { (error) in
+                    fail(error)
+                })
+            }) { (error) in
                 fail(error)
-            })
-        }) { (error) in
-            fail(error)
+            }
+        } else {
+            fail(CustomError("Apple music key is not available."))
         }
     }
     private static func processGenreData(data: [String:Any], success: @escaping (_ data: [String]) -> Void, fail: @escaping (_ error: Error) -> Void) {
