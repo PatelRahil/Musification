@@ -8,8 +8,9 @@
 
 import UIKit
 
-class ArtistsVC: UITableViewController {
+class ArtistsVC: UIViewController {
     
+    @IBOutlet weak var tableView: UITableView!
     var toolbar: UIView?
     var toolbarWrapper: CustomToolbar?
     
@@ -20,7 +21,7 @@ class ArtistsVC: UITableViewController {
         toolbar = toolbarWrapper!.toolbarView
         view.addSubview(toolbar!)
         var frame = toolbar!.frame
-        frame = CGRect(x: frame.minX, y: frame.minY - 44, width: frame.width, height: frame.height)
+        frame = CGRect(x: frame.minX, y: frame.minY, width: frame.width, height: frame.height)
         toolbar!.frame = frame
         toolbar?.layer.zPosition = 5
         layoutViews()
