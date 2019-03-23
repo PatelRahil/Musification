@@ -31,9 +31,25 @@ class ArtistsVC: UIViewController {
     }
         
     func layoutViews() {
-        self.tableView.frame = CGRect(x: UIScreen.main.bounds.origin.x, y: UIScreen.main.bounds.origin.y, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
-        self.tableView.backgroundColor = Colors.bgColor
-        self.view.tintColor = Colors.tintColor
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.frame = CGRect(x: UIScreen.main.bounds.origin.x, y: UIScreen.main.bounds.origin.y, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+        tableView.backgroundColor = Colors.bgColor
+        view.tintColor = Colors.tintColor
         
+    }
+}
+
+extension ArtistsVC: UITableViewDelegate {
+    
+}
+
+extension ArtistsVC: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 0
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        return UITableViewCell()
     }
 }
