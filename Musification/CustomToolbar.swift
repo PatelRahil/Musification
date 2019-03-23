@@ -43,7 +43,7 @@ class CustomToolbar {
                 button.tag = index
                 
                 if index == CustomToolbar.state {
-                    button.backgroundColor = toolbarView.backgroundColor?.darker(by: 40)
+                    button.backgroundColor = toolbarView.backgroundColor?.darker(by: 25)
                 }
                 
                 button.addTarget(self, action: #selector(buttonTapped(_:)), for: .touchUpInside)
