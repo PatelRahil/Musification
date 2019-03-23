@@ -9,11 +9,11 @@
 import Foundation
 
 class HttpRequest {
-    static func makeGetRequest(urlString: String, header: String, success: @escaping (_ data: [String:Any]) -> Void, fail: @escaping (_ error: Error) -> Void) {
+    static func makeGetRequest(urlString: String, header: String, headerField: String, success: @escaping (_ data: [String:Any]) -> Void, fail: @escaping (_ error: Error) -> Void) {
         if let dbURL = URL(string: urlString) {
             var dbRequest = URLRequest(url: dbURL, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 60)
             dbRequest.httpMethod = "GET"
-            dbRequest.addValue(header, forHTTPHeaderField: "Authorization")
+            dbRequest.addValue(header, forHTTPHeaderField: headerField)
             let task = URLSession.shared.dataTask(with: dbRequest) { (data, response, error) in
                 if let data = data {
                     do {

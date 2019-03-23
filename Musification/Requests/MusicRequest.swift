@@ -16,7 +16,8 @@ class MusicRequest : HttpRequest {
         let urlString = rootDbPath + storefront + "/genres"
         if let key = APIKeys.appleMusicKey {
             let header = "Bearer " + key
-            super.makeGetRequest(urlString: urlString, header: header, success: { (data) in
+            let headerField = "Authorization"
+            super.makeGetRequest(urlString: urlString, header: header, headerField: headerField, success: { (data) in
                 processGenreData(data: data, success: { (genres) in
                     success(genres)
                 }, fail: { (error) in
