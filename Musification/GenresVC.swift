@@ -13,6 +13,7 @@ class GenresVC: UICollectionViewController {
     let itemsPerRow = 2
     let sectionInsets = UIEdgeInsets(top: 10, left: 15, bottom: 10, right: 15)
     var genres: [Genre] = []
+    var selectedSongs: [Song] = []
     
     var toolbar: UIView?
     var toolbarWrapper: CustomToolbar?
@@ -27,6 +28,7 @@ class GenresVC: UICollectionViewController {
         navigationController?.isNavigationBarHidden = true
         // Do any additional setup after loading the view, typically from a nib.
         layoutSubviews()
+        showSpinner(onView: view)
         print("\n\n\n\n")
         MusicRequest.getGenres(success: { (genres) in
             print("Genres:")
@@ -37,6 +39,7 @@ class GenresVC: UICollectionViewController {
             DispatchQueue.main.async {
                 self.collectionView.reloadData()
             }
+            self.removeSpinner()
         }) { (error) in
             print("Genre Failure:")
             print(error)
@@ -48,7 +51,9 @@ class GenresVC: UICollectionViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
+        if let dest = segue.destination as? SongsVC {
+            dest.songs = selectedSongs
+        }
     }
     
     func layoutSubviews() {
@@ -117,11 +122,15 @@ extension GenresVC {
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let genreName = genres[indexPath.section * 2 + indexPath.row].name
         let genreId = genres[indexPath.section * 2 + indexPath.row].id
-        let limit = 5
-        MusicRequest.getSongs(genreID: genreId, limit: 5, success: { (songs) in
+        let limit = 20
+        MusicRequest.getSongs(genreID: genreId, limit: limit, success: { (songs) in
             print("Top \(limit) songs for the \(genreName) genre:")
             for song in songs {
                 print("\"\(song.name)\" by \(song.artist)")
+            }
+            self.selectedSongs = songs
+            DispatchQueue.main.async {
+                self.performSegue(withIdentifier: "GenresToSongs", sender: nil)
             }
         }) { (error) in
             print("Song Failure")

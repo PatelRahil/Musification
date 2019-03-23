@@ -39,10 +39,41 @@
                         </connections>
                     </collectionView>
                     <navigationItem key="navigationItem" id="aMb-ce-zut"/>
+                    <connections>
+                        <segue destination="yKE-xg-D04" kind="show" identifier="GenresToSongs" id="mRO-9s-CVF"/>
+                    </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cqS-vU-I1v" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-409" y="133"/>
+        </scene>
+        <!--SongsVC-->
+        <scene sceneID="VJn-hc-0kt">
+            <objects>
+                <tableViewController id="yKE-xg-D04" customClass="SongsVC" customModule="Musification" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="1Iv-1a-NtP">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="EtJ-Bz-17p">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="EtJ-Bz-17p" id="wAC-Vs-eGu">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="yKE-xg-D04" id="v8q-eL-3zG"/>
+                            <outlet property="delegate" destination="yKE-xg-D04" id="DDy-a1-n4H"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ihm-eB-zuT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="567" y="133"/>
         </scene>
         <!--ArtistsVC-->
         <scene sceneID="cZj-rb-A2f">
@@ -70,7 +101,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SRf-XP-OZH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="460" y="152"/>
+            <point key="canvasLocation" x="-410" y="-542"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="IKU-JC-mvy">
