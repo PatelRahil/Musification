@@ -12,10 +12,15 @@ class MusicRequest : HttpRequest {
     static let rootDbPath = "https://api.music.apple.com/v1/catalog/"
     // can add functionality later to change based on locality
     static let storefront = "us"
+    static var header: String? {
+        if let key = APIKeys.appleMusicKey {
+            return "Bearer " + key
+        }
+        return nil
+    }
     static func getGenres(success: @escaping (_ data: [String]) -> Void, fail: @escaping (_ error: Error) -> Void) {
         let urlString = rootDbPath + storefront + "/genres"
-        if let key = APIKeys.appleMusicKey {
-            let header = "Bearer " + key
+        if let header = header {
             let headerField = "Authorization"
             super.makeGetRequest(urlString: urlString, header: header, headerField: headerField, success: { (data) in
                 processGenreData(data: data, success: { (genres) in
