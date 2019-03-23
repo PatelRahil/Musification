@@ -26,7 +26,9 @@ class CustomToolbar {
         print(parent.bounds.maxY)
         navController = navigationController
         let height: CGFloat = 80
-        toolbarView = UIView(frame: CGRect(x: 0, y: parent.bounds.maxY - height, width: parent.bounds.width, height: height))
+        // without offset there is a thin border to the right of the toolbar
+        let offset: CGFloat = 1
+        toolbarView = UIView(frame: CGRect(x: 0, y: parent.bounds.maxY - height, width: parent.bounds.width + offset, height: height))
         toolbarView.backgroundColor = Colors.primaryColor
         let itemWidth = toolbarView.frame.width / CGFloat(CustomToolbar.items.count)
         for (index,item) in CustomToolbar.items.enumerated() {
@@ -38,8 +40,11 @@ class CustomToolbar {
                 button.setTitle(item.content, for: .normal)
                 button.setTitleColor(Colors.textColorOnPrimaryColor, for: .normal)
                 button.frame = frame
+                /*
                 button.layer.borderWidth = 1
                 button.layer.borderColor = Colors.bgColor.cgColor
+                */
+                button.setBorders(toEdges: [.right, .top], withColor: Colors.bgColor, thickness: 1)
                 button.tag = index
                 
                 if index == CustomToolbar.state {

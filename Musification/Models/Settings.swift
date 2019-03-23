@@ -9,5 +9,5 @@
 import Foundation
 
 class Settings {
-    static var darkMode = false
+    static var darkMode = true
 }
