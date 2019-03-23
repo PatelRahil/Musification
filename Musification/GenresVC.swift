@@ -41,16 +41,6 @@ class GenresVC: UICollectionViewController {
             print("Genre Failure:")
             print(error)
         }
-        print()
-        MusicRequest.getSongs(genreID: "20", limit: 10, success: { (songs) in
-            print("Songs:")
-            for song in songs {
-                print("\(song.name) by \(song.artist)")
-            }
-        }) { (error) in
-            print("Song Failure")
-            print(error)
-        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -123,6 +113,21 @@ extension GenresVC {
         }
         
         return cell
+    }
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let genreName = genres[indexPath.section * 2 + indexPath.row].name
+        let genreId = genres[indexPath.section * 2 + indexPath.row].id
+        let limit = 5
+        MusicRequest.getSongs(genreID: genreId, limit: 5, success: { (songs) in
+            print("Top \(limit) songs for the \(genreName) genre:")
+            for song in songs {
+                print("\"\(song.name)\" by \(song.artist)")
+            }
+        }) { (error) in
+            print("Song Failure")
+            print(error)
+        }
+        print()
     }
 }
 
