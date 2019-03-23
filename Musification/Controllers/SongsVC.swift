@@ -39,6 +39,7 @@ extension SongsVC {
             let song = songs[indexPath.row]
             cell.textLabel?.text = "\"\(song.name)\" by \(song.artist)"
             cell.textLabel?.textColor = Colors.textColor
+            print(Colors.textColor)
             cell.textLabel?.font = UIFont(name: cell.textLabel!.font.fontName, size: 15)
         }
         return cell

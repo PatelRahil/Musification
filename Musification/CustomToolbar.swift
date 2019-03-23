@@ -36,7 +36,7 @@ class CustomToolbar {
             case .text:
                 let button = UIButton()
                 button.setTitle(item.content, for: .normal)
-                button.setTitleColor(Colors.textColor, for: .normal)
+                button.setTitleColor(Colors.textColorOnPrimaryColor, for: .normal)
                 button.frame = frame
                 button.layer.borderWidth = 1
                 button.layer.borderColor = Colors.bgColor.cgColor

@@ -28,6 +28,7 @@
 		5A9F4A9D21D6B2E100731D7E /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A9F4A9C21D6B2E100731D7E /* Colors.swift */; };
 		5A9F4A9F21D7E81D00731D7E /* CustomToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A9F4A9E21D7E81D00731D7E /* CustomToolbar.swift */; };
 		5AA0B7352246B1CB00965922 /* UIKitExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AA0B7342246B1CB00965922 /* UIKitExtensions.swift */; };
+		5AB684482246E86200C8D2C1 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB684472246E86200C8D2C1 /* Settings.swift */; };
 		5AD30D7B21E1578C0066BFA6 /* ArtistsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AD30D7A21E1578C0066BFA6 /* ArtistsVC.swift */; };
 		6389878444C99FEB5E2913F9 /* Pods_MusificationUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F22F5540773FDC7EBEAAEBA /* Pods_MusificationUITests.framework */; };
 		72B83A3A1B6352ACE318DFE7 /* Pods_MusificationTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CDC0489BA5A96745D740FCA /* Pods_MusificationTests.framework */; };
@@ -82,6 +83,7 @@
 		5A9F4A9C21D6B2E100731D7E /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		5A9F4A9E21D7E81D00731D7E /* CustomToolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomToolbar.swift; sourceTree = "<group>"; };
 		5AA0B7342246B1CB00965922 /* UIKitExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIKitExtensions.swift; sourceTree = "<group>"; };
+		5AB684472246E86200C8D2C1 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		5AD30D7A21E1578C0066BFA6 /* ArtistsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistsVC.swift; sourceTree = "<group>"; };
 		5DDC4CF409C79830F0C73ACB /* Pods-MusificationUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MusificationUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MusificationUITests/Pods-MusificationUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		65FC3E1C374557814B9E8489 /* Pods-Musification.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Musification.release.xcconfig"; path = "Pods/Target Support Files/Pods-Musification/Pods-Musification.release.xcconfig"; sourceTree = "<group>"; };
@@ -135,6 +137,7 @@
 				5A907BBB2245F73400E9CF75 /* Song.swift */,
 				5A907BBD2245F73A00E9CF75 /* Artist.swift */,
 				5A907BC02245FA0600E9CF75 /* DataParsable.swift */,
+				5AB684472246E86200C8D2C1 /* Settings.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -472,6 +475,7 @@
 				5A907BC32246867200E9CF75 /* SongsVC.swift in Sources */,
 				5A907BBE2245F73A00E9CF75 /* Artist.swift in Sources */,
 				5A907BB1224410E900E9CF75 /* HttpRequest.swift in Sources */,
+				5AB684482246E86200C8D2C1 /* Settings.swift in Sources */,
 				5A907BB42244AE8600E9CF75 /* APIKeys.swift in Sources */,
 				5A907BB8224556CB00E9CF75 /* CollectionViewCells.swift in Sources */,
 				5A9F4A6F21D6B02700731D7E /* AppDelegate.swift in Sources */,

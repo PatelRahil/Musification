@@ -14,13 +14,22 @@ struct Colors {
     /// The current app theme.
     private static let cinnabar = UIColor(r: 231, g: 76, b: 60, a: 1)
     private static let black = UIColor(r: 0, g: 0, b: 0, a: 1)
-    private static let white = UIColor(r: 1, g: 1, b: 1, a: 1)
+    private static let white = UIColor(r: 248, g: 248, b: 248, a: 1)
     
     static let primaryColor = cinnabar
-    static let bgColor = black
     static let secondaryColor = cinnabar
-    static let tintColor = white
-    static let textColor = black
+    static var bgColor: UIColor {
+        return Settings.darkMode ? black : white
+    }
+    static var tintColor: UIColor {
+        return Settings.darkMode ? white : black
+    }
+    static var textColor: UIColor {
+        return Settings.darkMode ? cinnabar : black
+    }
+    static var textColorOnPrimaryColor: UIColor {
+        return bgColor
+    }
 }
 
 extension UIColor {

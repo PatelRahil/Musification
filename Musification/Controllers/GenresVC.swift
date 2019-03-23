@@ -114,7 +114,7 @@ extension GenresVC {
             cell.tag = -1
         } else {
             cell.cellTextLbl.text = genres[cellForItemAt.section * 2 + cellForItemAt.row].name
-            cell.cellTextLbl.textColor = Colors.textColor
+            cell.cellTextLbl.textColor = Colors.textColorOnPrimaryColor
         }
         
         return cell
