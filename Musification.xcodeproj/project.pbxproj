@@ -128,7 +128,7 @@
 			path = Requests;
 			sourceTree = "<group>";
 		};
-		5A907BBF2245F74100E9CF75 /* Model */ = {
+		5A907BBF2245F74100E9CF75 /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				5A907BB92245F72C00E9CF75 /* Genre.swift */,
@@ -136,7 +136,7 @@
 				5A907BBD2245F73A00E9CF75 /* Artist.swift */,
 				5A907BC02245FA0600E9CF75 /* DataParsable.swift */,
 			);
-			path = Model;
+			path = Models;
 			sourceTree = "<group>";
 		};
 		5A9F4A6221D6B02700731D7E = {
@@ -167,10 +167,8 @@
 			children = (
 				5A9F4A6E21D6B02700731D7E /* AppDelegate.swift */,
 				5A907BB32244AE8600E9CF75 /* APIKeys.swift */,
-				5A9F4A7021D6B02700731D7E /* GenresVC.swift */,
-				5AD30D7A21E1578C0066BFA6 /* ArtistsVC.swift */,
-				5A907BC22246867100E9CF75 /* SongsVC.swift */,
-				5A907BBF2245F74100E9CF75 /* Model */,
+				5AB684462246E5B400C8D2C1 /* Controllers */,
+				5A907BBF2245F74100E9CF75 /* Models */,
 				5A907BB222448B8D00E9CF75 /* Requests */,
 				5A9F4A9C21D6B2E100731D7E /* Colors.swift */,
 				5A9F4A7221D6B02700731D7E /* Main.storyboard */,
@@ -201,6 +199,16 @@
 				5A9F4A9021D6B02C00731D7E /* Info.plist */,
 			);
 			path = MusificationUITests;
+			sourceTree = "<group>";
+		};
+		5AB684462246E5B400C8D2C1 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				5A9F4A7021D6B02700731D7E /* GenresVC.swift */,
+				5AD30D7A21E1578C0066BFA6 /* ArtistsVC.swift */,
+				5A907BC22246867100E9CF75 /* SongsVC.swift */,
+			);
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 		5BC060770DD0C3BAD9EC9A76 /* Frameworks */ = {

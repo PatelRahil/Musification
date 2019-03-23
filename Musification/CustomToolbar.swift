@@ -27,7 +27,7 @@ class CustomToolbar {
         navController = navigationController
         let height: CGFloat = 80
         toolbarView = UIView(frame: CGRect(x: 0, y: parent.bounds.maxY - height, width: parent.bounds.width, height: height))
-        toolbarView.backgroundColor = Colors.cinnabar
+        toolbarView.backgroundColor = Colors.primaryColor
         let itemWidth = toolbarView.frame.width / CGFloat(CustomToolbar.items.count)
         for (index,item) in CustomToolbar.items.enumerated() {
             print(item)
@@ -36,10 +36,10 @@ class CustomToolbar {
             case .text:
                 let button = UIButton()
                 button.setTitle(item.content, for: .normal)
-                button.setTitleColor(UIColor.black, for: .normal)
+                button.setTitleColor(Colors.textColor, for: .normal)
                 button.frame = frame
                 button.layer.borderWidth = 1
-                button.layer.borderColor = UIColor.black.cgColor
+                button.layer.borderColor = Colors.bgColor.cgColor
                 button.tag = index
                 
                 if index == CustomToolbar.state {

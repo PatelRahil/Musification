@@ -15,10 +15,10 @@ class SongsVC: UITableViewController {
         layoutSubviews()
     }
     private func layoutSubviews() {
-        view.backgroundColor = UIColor.black
+        view.backgroundColor = Colors.bgColor
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.separatorColor = Colors.cinnabar
+        tableView.separatorColor = Colors.primaryColor
     }
 }
 
@@ -34,11 +34,11 @@ extension SongsVC {
     }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell()
-        cell.backgroundColor = UIColor.black
+        cell.backgroundColor = Colors.bgColor
         if let songs = songs {
             let song = songs[indexPath.row]
             cell.textLabel?.text = "\"\(song.name)\" by \(song.artist)"
-            cell.textLabel?.textColor = Colors.cinnabar
+            cell.textLabel?.textColor = Colors.textColor
             cell.textLabel?.font = UIFont(name: cell.textLabel!.font.fontName, size: 15)
         }
         return cell

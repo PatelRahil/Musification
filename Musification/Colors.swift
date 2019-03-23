@@ -12,7 +12,15 @@ import UIKit
 struct Colors {
     /// A flat burnt red color.
     /// The current app theme.
-    static let cinnabar = UIColor.init(r: 231, g: 76, b: 60, a: 1)
+    private static let cinnabar = UIColor(r: 231, g: 76, b: 60, a: 1)
+    private static let black = UIColor(r: 0, g: 0, b: 0, a: 1)
+    private static let white = UIColor(r: 1, g: 1, b: 1, a: 1)
+    
+    static let primaryColor = cinnabar
+    static let bgColor = black
+    static let secondaryColor = cinnabar
+    static let tintColor = white
+    static let textColor = black
 }
 
 extension UIColor {

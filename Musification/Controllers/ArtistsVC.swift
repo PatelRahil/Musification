@@ -31,8 +31,8 @@ class ArtistsVC: UITableViewController {
         
     func layoutViews() {
         self.tableView.frame = CGRect(x: UIScreen.main.bounds.origin.x, y: UIScreen.main.bounds.origin.y, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
-        self.tableView.backgroundColor = UIColor.black
-        self.view.tintColor = UIColor.white
+        self.tableView.backgroundColor = Colors.bgColor
+        self.view.tintColor = Colors.tintColor
         
     }
 }
