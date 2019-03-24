@@ -138,6 +138,7 @@
 				5A907BBD2245F73A00E9CF75 /* Artist.swift */,
 				5A907BC02245FA0600E9CF75 /* DataParsable.swift */,
 				5AB684472246E86200C8D2C1 /* Settings.swift */,
+				5A9F4A9C21D6B2E100731D7E /* Colors.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -173,7 +174,6 @@
 				5AB684462246E5B400C8D2C1 /* Controllers */,
 				5A907BBF2245F74100E9CF75 /* Models */,
 				5A907BB222448B8D00E9CF75 /* Requests */,
-				5A9F4A9C21D6B2E100731D7E /* Colors.swift */,
 				5A9F4A7221D6B02700731D7E /* Main.storyboard */,
 				5AA0B7342246B1CB00965922 /* UIKitExtensions.swift */,
 				5A907BB7224556CB00E9CF75 /* CollectionViewCells.swift */,
