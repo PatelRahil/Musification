@@ -20,23 +20,34 @@ class ArtistsVC: UIViewController {
         toolbarWrapper = CustomToolbar(navigationController: self.navigationController!)
         toolbar = toolbarWrapper!.toolbarView
         view.addSubview(toolbar!)
-        var frame = toolbar!.frame
-        frame = CGRect(x: frame.minX, y: frame.minY, width: frame.width, height: frame.height)
-        toolbar!.frame = frame
         toolbar?.layer.zPosition = 5
         layoutViews()
     }
-    
-    override func viewWillLayoutSubviews() {
+    override func viewDidLayoutSubviews() {
+        print(tableView.frame)
+        print(tableView.bounds)
+        print()
     }
-        
     func layoutViews() {
+        navigationController?.isNavigationBarHidden = false
+        navigationItem.setHidesBackButton(true, animated: false)
+        navigationItem.title = "Artists"
+        view.tintColor = Colors.tintColor
         tableView.delegate = self
         tableView.dataSource = self
         tableView.frame = CGRect(x: UIScreen.main.bounds.origin.x, y: UIScreen.main.bounds.origin.y, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
         tableView.backgroundColor = Colors.bgColor
-        view.tintColor = Colors.tintColor
-        
+        let searchController = UISearchController(searchResultsController: nil)
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search artists"
+        navigationItem.searchController = searchController
+    }
+    
+    override func updateViewConstraints() {
+        super.updateViewConstraints()
+        toolbarWrapper?.toolbarView.translatesAutoresizingMaskIntoConstraints = false
+        toolbarWrapper?.setupConstraints(on: view)
     }
 }
 
@@ -51,5 +62,14 @@ extension ArtistsVC: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         return UITableViewCell()
+    }
+}
+
+extension ArtistsVC: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        guard let text = searchController.searchBar.text else {
+            return
+        }
+        print(text)
     }
 }

@@ -101,6 +101,16 @@ class CustomToolbar {
         }
         
     }
+    
+    func setupConstraints(on view: UIView) {
+        let height: CGFloat = 80
+        let horizontalConstraint = NSLayoutConstraint(item: toolbarView, attribute: .centerX, relatedBy: .equal, toItem: view, attribute: .centerX, multiplier: 1, constant: 0)
+        let verticalConstraint = NSLayoutConstraint(item: toolbarView, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 1, constant: 0)
+        let widthConstraint = NSLayoutConstraint(item: toolbarView, attribute: .width, relatedBy: .equal, toItem: view, attribute: .width, multiplier: 1, constant: 0)
+        let heightConstraint = NSLayoutConstraint(item: toolbarView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: height)
+        toolbarView.addConstraints([heightConstraint])
+        view.addConstraints([horizontalConstraint, verticalConstraint, widthConstraint])
+    }
 }
 
 struct ToolbarItem {

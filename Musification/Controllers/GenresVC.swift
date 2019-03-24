@@ -45,6 +45,19 @@ class GenresVC: UICollectionViewController {
             print(error)
         }
     }
+    override func updateViewConstraints() {
+        super.updateViewConstraints()
+        toolbarWrapper?.toolbarView.tag = 696969
+        print("About to layout subviews")
+        print(view)
+        print("View's subviews: \(view.subviews)")
+        print("View's superview: \(view.superview)")
+        print("Superview's subviews: \(view.superview?.subviews)")
+        toolbarWrapper?.toolbarView.translatesAutoresizingMaskIntoConstraints = false
+        let contraint = NSLayoutConstraint(item: toolbarWrapper!.toolbarView, attribute: .width, relatedBy: .equal, toItem: view, attribute: .width, multiplier: 1, constant: 0)
+        //view.addConstraint(contraint)
+        toolbarWrapper?.setupConstraints(on: view)
+    }
     
     override func viewDidAppear(_ animated: Bool) {
         navigationController?.isNavigationBarHidden = true
