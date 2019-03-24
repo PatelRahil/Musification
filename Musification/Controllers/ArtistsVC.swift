@@ -23,11 +23,6 @@ class ArtistsVC: UIViewController {
         toolbar?.layer.zPosition = 5
         layoutViews()
     }
-    override func viewDidLayoutSubviews() {
-        print(tableView.frame)
-        print(tableView.bounds)
-        print()
-    }
     func layoutViews() {
         navigationController?.isNavigationBarHidden = false
         navigationItem.setHidesBackButton(true, animated: false)

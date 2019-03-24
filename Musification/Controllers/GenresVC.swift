@@ -25,15 +25,9 @@ class GenresVC: UICollectionViewController {
         toolbarWrapper = CustomToolbar(navigationController: self.navigationController!)
         toolbar = toolbarWrapper!.toolbarView
         view.addSubview(toolbar!)
-        // Do any additional setup after loading the view, typically from a nib.
         layoutSubviews()
         showSpinner(onView: view)
-        print("\n\n\n\n")
         MusicRequest.getGenres(success: { (genres) in
-            print("Genres:")
-            for genre in genres {
-                print(genre.name)
-            }
             self.genres = genres
             DispatchQueue.main.async {
                 self.collectionView.reloadData()
@@ -46,20 +40,11 @@ class GenresVC: UICollectionViewController {
     }
     override func updateViewConstraints() {
         super.updateViewConstraints()
-        toolbarWrapper?.toolbarView.tag = 696969
-        print("About to layout subviews")
-        print(view)
-        print("View's subviews: \(view.subviews)")
-        print("View's superview: \(view.superview)")
-        print("Superview's subviews: \(view.superview?.subviews)")
         toolbarWrapper?.toolbarView.translatesAutoresizingMaskIntoConstraints = false
-        let contraint = NSLayoutConstraint(item: toolbarWrapper!.toolbarView, attribute: .width, relatedBy: .equal, toItem: view, attribute: .width, multiplier: 1, constant: 0)
-        //view.addConstraint(contraint)
         toolbarWrapper?.setupConstraints(on: view)
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        //navigationController?.isNavigationBarHidden = true
         navigationController?.isNavigationBarHidden = false
         navigationItem.hidesBackButton = true
     }
