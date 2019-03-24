@@ -25,7 +25,6 @@ class GenresVC: UICollectionViewController {
         toolbarWrapper = CustomToolbar(navigationController: self.navigationController!)
         toolbar = toolbarWrapper!.toolbarView
         view.addSubview(toolbar!)
-        navigationController?.isNavigationBarHidden = true
         // Do any additional setup after loading the view, typically from a nib.
         layoutSubviews()
         showSpinner(onView: view)
@@ -60,7 +59,9 @@ class GenresVC: UICollectionViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        navigationController?.isNavigationBarHidden = true
+        //navigationController?.isNavigationBarHidden = true
+        navigationController?.isNavigationBarHidden = false
+        navigationItem.hidesBackButton = true
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -70,8 +71,13 @@ class GenresVC: UICollectionViewController {
     }
     
     func layoutSubviews() {
+        navigationController?.navigationBar.barTintColor = Colors.bgColor.lighter(by: 10)
+        navigationController?.navigationBar.tintColor = Colors.textColor
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: Colors.textColor]
+        navigationItem.title = "Genres"
         self.collectionView.frame = CGRect(x: UIScreen.main.bounds.origin.x, y: UIScreen.main.bounds.origin.y, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height - toolbar!.frame.height)
         self.collectionView.backgroundColor = Colors.bgColor
+        
     }
     
 
