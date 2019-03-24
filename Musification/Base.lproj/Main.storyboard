@@ -67,6 +67,7 @@
                     </view>
                     <connections>
                         <outlet property="tableView" destination="Irx-x1-6ww" id="Ifc-Xg-zr0"/>
+                        <segue destination="s1g-64-lSX" kind="show" identifier="ArtistsToFollowArtist" id="wmK-mS-Lqa"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x97-uF-hej" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -96,10 +97,34 @@
                             <outlet property="delegate" destination="yKE-xg-D04" id="DDy-a1-n4H"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <segue destination="s1g-64-lSX" kind="show" identifier="SongsToFollowArtist" id="iBQ-dR-Vak"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ihm-eB-zuT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="567" y="133"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="L0a-3a-z95">
+            <objects>
+                <viewController id="s1g-64-lSX" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="eEx-gr-eBu">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="hs1-mn-js4">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="sF1-Yh-ym3"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FpR-YS-jsZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1321" y="-600"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="IKU-JC-mvy">
@@ -118,4 +143,7 @@
             <point key="canvasLocation" x="-1370" y="133"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="iBQ-dR-Vak"/>
+    </inferredMetricsTieBreakers>
 </document>
