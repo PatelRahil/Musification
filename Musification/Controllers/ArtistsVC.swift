@@ -14,6 +14,8 @@ class ArtistsVC: UIViewController {
     var toolbar: UIView?
     var toolbarWrapper: CustomToolbar?
     
+    var artists:[Artist] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.isNavigationBarHidden = true
@@ -24,6 +26,7 @@ class ArtistsVC: UIViewController {
         layoutViews()
     }
     func layoutViews() {
+        definesPresentationContext = true
         navigationController?.isNavigationBarHidden = false
         navigationItem.setHidesBackButton(true, animated: false)
         navigationItem.title = "Artists"
@@ -36,6 +39,7 @@ class ArtistsVC: UIViewController {
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Search artists"
+        searchController.searchBar.tintColor = Colors.textColor
         navigationItem.searchController = searchController
     }
     
@@ -66,11 +70,19 @@ extension ArtistsVC: UITableViewDelegate {
 
 extension ArtistsVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+        return artists.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
+        let cell = UITableViewCell()
+        let artist = artists[indexPath.row]
+        cell.textLabel!.text = artist.name
+        cell.textLabel?.textColor = Colors.textColor
+        cell.backgroundColor = Colors.bgColor
+        return cell
+    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        artists[indexPath.row].openURL(controller: self)
     }
 }
 
@@ -78,6 +90,18 @@ extension ArtistsVC: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         guard let text = searchController.searchBar.text else {
             return
+        }
+        if text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+            return
+        }
+        MusicRequest.getArtistsStarting(with: text, limit: 20, success: { (artists) in
+            self.artists = artists
+            print(artists)
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }) { (error) in
+            print("Getting Artists failture: \n\(error)")
         }
         print(text)
     }

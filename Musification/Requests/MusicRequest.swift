@@ -60,8 +60,29 @@ class MusicRequest : HttpRequest {
         print(urlString)
         if let header = header {
             super.makeGetRequest(urlString: urlString, header: header, headerField: headerField, success: { (data) in
-                processArtistData(data: data, success: { (artist) in
-                    success(artist)
+                processArtistsData(data: data, success: { (artists) in
+                    if let firstArtist = artists.first {
+                        success(firstArtist)
+                    } else {
+                        fail(CustomError("The search didn't yield any artists"))
+                    }
+                }, fail: { (error) in
+                    fail(error)
+                })
+            }) { (error) in
+                fail(error)
+            }
+        }
+    }
+    static func getArtistsStarting(with artistName: String, limit: Int, success: @escaping (_ artist: [Artist]) -> Void, fail: @escaping (_ error: Error) -> Void) {
+        let formattedArtistName = artistName.replacingOccurrences(of: " ", with: "+")
+        let urlString = rootDbPath + storefront + "/search?term=\(formattedArtistName)&limit=\(limit)&types=artists"
+        print("URL STRING:")
+        print(urlString)
+        if let header = header {
+            super.makeGetRequest(urlString: urlString, header: header, headerField: headerField, success: { (data) in
+                processArtistsData(data: data, success: { (artists) in
+                    success(artists)
                 }, fail: { (error) in
                     fail(error)
                 })
@@ -92,31 +113,27 @@ class MusicRequest : HttpRequest {
                             fail(error)
                         }
                     } else {
-                        fail(CustomError("The songs does not have \"data\" or songsData is not an array of String:Any dictionaries."))
+                        fail(CustomError("The songs does not have \"data\" or songsData is not an array of String:Any dictionaries. Songs is: \n\(songs)"))
                     }
                 } else {
                     fail(CustomError("The songs wrapper does not have any elements."))
                 }
             } else {
-                fail(CustomError("The results does not have \"songs\" or songsWrapper is not an array of String:Any dictionaries."))
+                fail(CustomError("The results does not have \"songs\" or songsWrapper is not an array of String:Any dictionaries. Results is: \n\(results)"))
             }
         } else {
-            fail(CustomError("The data does not have \"results\" or results is not a dictionary of String:Any pairs."))
+            fail(CustomError("The data does not have \"results\" or results is not a dictionary of String:Any pairs. Data is: \n\(data)"))
         }
     }
-    private static func processArtistData(data: [String:Any], success: @escaping (_ artist: Artist) -> Void, fail: @escaping (_ error: Error) -> Void) {
+    
+    private static func processArtistsData(data: [String:Any], success: @escaping (_ artist: [Artist]) -> Void, fail: @escaping (_ error: Error) -> Void) {
         if let results = data["results"] as? [String:Any] {
             if let artists = results["artists"] as? [String:Any] {
                 if let artistsData = artists["data"] as? [[String:Any]] {
-                    if let artistData = artistsData.first {
-                        let artist = Artist()
-                        artist.parseData(data: artistData, success: { (artist) in
-                            success(artist)
-                        }) { (error) in
-                            fail(error)
-                        }
-                    } else {
-                        fail(CustomError("No artists were returned from search."))
+                    processArrayOf(arrData: artistsData, example: Artist(), success: { (artists) in
+                        success(artists)
+                    }) { (error) in
+                        fail(error)
                     }
                 } else {
                     fail(CustomError("Artists does not have \"data\" or artistsData is not an array of String:Any dictionaries."))
