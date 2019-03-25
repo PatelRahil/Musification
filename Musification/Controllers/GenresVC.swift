@@ -11,9 +11,11 @@ import UIKit
 class GenresVC: UICollectionViewController {
 
     let itemsPerRow = 2
+    let selectedSongsLimit = 20
     let sectionInsets = UIEdgeInsets(top: 10, left: 15, bottom: 10, right: 15)
     var genres: [Genre] = []
     var selectedSongs: [Song] = []
+    var selectedGenre: Genre = Genre()
     
     var toolbar: UIView?
     var toolbarWrapper: CustomToolbar?
@@ -52,6 +54,10 @@ class GenresVC: UICollectionViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let dest = segue.destination as? SongsVC {
             dest.songs = selectedSongs
+            let barButton = UIBarButtonItem(title: selectedGenre.name, style: .done, target: dest, action: nil)
+            let heightConstraint = barButton.customView?.heightAnchor.constraint(equalToConstant: 35)
+            heightConstraint?.isActive = true
+            dest.navigationItem.setRightBarButton(barButton, animated: true)
         }
     }
     
@@ -124,15 +130,16 @@ extension GenresVC {
         return cell
     }
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let genreName = genres[indexPath.section * 2 + indexPath.row].name
-        let genreId = genres[indexPath.section * 2 + indexPath.row].id
-        let limit = 20
-        MusicRequest.getSongs(genreID: genreId, limit: limit, success: { (songs) in
-            print("Top \(limit) songs for the \(genreName) genre:")
+        let genre = genres[indexPath.section * 2 + indexPath.row]
+        let genreName = genre.name
+        let genreId = genre.id
+        MusicRequest.getSongs(genreID: genreId, limit: selectedSongsLimit, success: { (songs) in
+            print("Top \(self.selectedSongsLimit) songs for the \(genreName) genre:")
             for song in songs {
                 print("\"\(song.name)\" by \(song.artist)")
             }
             self.selectedSongs = songs
+            self.selectedGenre = genre
             DispatchQueue.main.async {
                 self.performSegue(withIdentifier: "GenresToSongs", sender: nil)
             }

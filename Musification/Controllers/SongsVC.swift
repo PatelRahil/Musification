@@ -19,6 +19,8 @@ class SongsVC: UITableViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.separatorColor = Colors.primaryColor
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: Colors.textColor, NSAttributedString.Key.font : UIFont.systemFont(ofSize: 35)]
+        
     }
 }
 
