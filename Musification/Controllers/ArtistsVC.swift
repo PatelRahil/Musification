@@ -85,6 +85,7 @@ extension ArtistsVC: UITableViewDataSource {
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         artists[indexPath.row].openURL(controller: self)
+        tableView.deselectRow(at: indexPath, animated: false)
     }
 }
 
