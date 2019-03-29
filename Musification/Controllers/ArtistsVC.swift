@@ -38,8 +38,10 @@ class ArtistsVC: UIViewController {
         let searchController = UISearchController(searchResultsController: nil)
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.delegate = self
         searchController.searchBar.placeholder = "Search artists"
         searchController.searchBar.tintColor = Colors.textColor
+        
         navigationItem.searchController = searchController
     }
     
@@ -92,6 +94,8 @@ extension ArtistsVC: UISearchResultsUpdating {
             return
         }
         if text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+            artists = []
+            tableView.reloadData()
             return
         }
         MusicRequest.getArtistsStarting(with: text, limit: 20, success: { (artists) in
@@ -104,5 +108,12 @@ extension ArtistsVC: UISearchResultsUpdating {
             print("Getting Artists failture: \n\(error)")
         }
         print(text)
+    }
+}
+
+extension ArtistsVC: UISearchBarDelegate {
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        artists = []
+        tableView.reloadData()
     }
 }

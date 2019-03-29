@@ -19,6 +19,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         FIRApp.configure()
         configureAPIs()
+        configureUIKit()
+
         return true
     }
 
@@ -55,6 +57,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let appleMusicAPIKey = keys["apple_music"]!
         APIKeys.appleMusicKey = appleMusicAPIKey
+    }
+    
+    private func configureUIKit() {
+        let appearence = UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self])
+        appearence.defaultTextAttributes = [NSAttributedString.Key.foregroundColor: Colors.textColor]
     }
 
 }
