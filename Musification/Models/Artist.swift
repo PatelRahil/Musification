@@ -13,7 +13,7 @@ class Artist: DataParsable {
     typealias Parsable = Artist
     var name: String = ""
     var id: String = ""
-    var urlString: String = ""
+    var appleMusicUrlString: String = ""
     required init() {}
     func parseData<Parsable>(data artistData: [String:Any], success: @escaping (_ result: Parsable) -> Void, fail: @escaping (_ error: Error) -> Void) {
         if let id = artistData["id"] as? String {
@@ -38,7 +38,7 @@ class Artist: DataParsable {
         success(self as! Parsable)
     }
     func openURL(controller: UIViewController) {
-        if let url = URL(string: urlString) {
+        if let url = URL(string: appleMusicUrlString) {
             let svc = SFSafariViewController(url: url)
             controller.present(svc, animated: true, completion: nil)
         }
