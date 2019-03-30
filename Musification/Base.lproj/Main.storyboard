@@ -105,10 +105,10 @@
             </objects>
             <point key="canvasLocation" x="567" y="133"/>
         </scene>
-        <!--View Controller-->
+        <!--Track ArtistVC-->
         <scene sceneID="L0a-3a-z95">
             <objects>
-                <viewController id="s1g-64-lSX" sceneMemberID="viewController">
+                <viewController id="s1g-64-lSX" customClass="TrackArtistVC" customModule="Musification" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="eEx-gr-eBu">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
