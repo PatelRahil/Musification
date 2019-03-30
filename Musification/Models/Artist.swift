@@ -28,7 +28,7 @@ class Artist: DataParsable {
                 fail(CustomError("artist attributes does not have a name or name is not a String."))
             }
             if let urlString = attributes["url"] as? String {
-                self.urlString = urlString
+                self.appleMusicUrlString = urlString
             } else {
                 fail(CustomError("artist attributes does not have a url or url is not a String."))
             }
