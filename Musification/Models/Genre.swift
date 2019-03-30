@@ -12,7 +12,7 @@ class Genre: DataParsable {
     typealias Parsable = Genre
     var name: String = ""
     var id: String = "0"
-    
+
     required init() {}
     
     func parseData<Parsable>(data genreData: [String : Any], success: @escaping (Parsable) -> Void, fail: @escaping (Error) -> Void) {
@@ -25,12 +25,12 @@ class Genre: DataParsable {
         } else {
             fail(CustomError("Genre data does not have attributes or attributes is not a String:Any pair."))
         }
-        
         if let genreID = genreData["id"] as? String {
             id = genreID
         } else {
             fail(CustomError("Genre data does not have an id or id is not a String"))
         }
+ 
         success(self as! Parsable)
     }
 }

@@ -62,7 +62,7 @@ class GenresVC: UICollectionViewController {
     }
     
     func layoutSubviews() {
-        navigationController?.navigationBar.barTintColor = Colors.bgColor.lighter(by: 10)
+        navigationController?.navigationBar.barTintColor = Colors.navBarColor.lighter(by: 10)
         navigationController?.navigationBar.tintColor = Colors.textColor
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: Colors.textColor]
         navigationItem.title = "Genres"

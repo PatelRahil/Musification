@@ -16,19 +16,26 @@ struct Colors {
     private static let black = UIColor(r: 0, g: 0, b: 0, a: 1)
     private static let white = UIColor(r: 248, g: 248, b: 248, a: 1)
     
-    static let primaryColor = cinnabar
-    static let secondaryColor = cinnabar
+    private static let pastelGreen = UIColor(r: 61, g: 165, b: 82, a: 1)
+    private static let orange = UIColor(r: 249, g: 168, b: 117, a: 1)
+    private static let beige = UIColor(r: 216, g: 210, b: 199, a: 1)
+    
+    static let primaryColor = pastelGreen //cinnabar
+    static let secondaryColor = pastelGreen //cinnabar
     static var bgColor: UIColor {
         return Settings.darkMode ? black : white
     }
     static var tintColor: UIColor {
-        return Settings.darkMode ? white : black
+        return Settings.darkMode ? black : beige
     }
     static var textColor: UIColor {
-        return Settings.darkMode ? cinnabar : black
+        return Settings.darkMode ? white : black
     }
     static var textColorOnPrimaryColor: UIColor {
         return bgColor
+    }
+    static var navBarColor: UIColor {
+        return Settings.darkMode ? bgColor : primaryColor
     }
 }
 
